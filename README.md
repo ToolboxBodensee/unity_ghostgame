@@ -1,2 +1,6 @@
 # unity_ghostgame
 test game developed at unity game jam (gamedev-meeting)
+
+
+this game was developed with the Linux version of Unity (2018.3.0f2).
+if you would like to build it might be a good idea to use exactly this version of Unity
