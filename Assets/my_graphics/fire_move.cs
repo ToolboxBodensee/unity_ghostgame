@@ -22,7 +22,7 @@ public class fire_move : MonoBehaviour
         
         if (collider.tag == "wallofdeath")
         {
-            Destroy(gameObject);
+            Destroy(gameObject, 2.0f);
         }
         
         if (collider.tag == "Player")

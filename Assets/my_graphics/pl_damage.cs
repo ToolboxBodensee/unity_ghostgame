@@ -12,6 +12,8 @@ public class pl_damage : MonoBehaviour
     public GameObject scoreboard;
     private long waitTime;
     private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ";
+    
+    public GameObject winsound;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class pl_damage : MonoBehaviour
     {
         if (waitTime != 0)
         {
-            if ((DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - waitTime > 2000)
+            if ((DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond) - waitTime > 5500)
             {
                 resetGame();
             }
@@ -47,7 +49,12 @@ public class pl_damage : MonoBehaviour
             winText.GetComponent<Text>().text = "PLAYER " + playerNumber + " WINS";
             waitTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             Time.timeScale = 0.0f;
+            
+            foreach(AudioSource sound in winsound.GetComponents<AudioSource>())
+                sound.Play();
         }
+        
+        GetComponent<AudioSource>().Play();
              
         updateScoreboard();
     }
