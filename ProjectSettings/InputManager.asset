@@ -105,13 +105,13 @@ InputManager:
     m_Name: Vertical2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: w
-    positiveButton: s
+    negativeButton: up
+    positiveButton: down
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.19
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 0
@@ -121,13 +121,13 @@ InputManager:
     m_Name: Horizontal2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: a
-    positiveButton: d
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.19
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 0
     type: 0
@@ -138,14 +138,14 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left shift
+    positiveButton: right shift
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
     dead: 0.19
     sensitivity: 1
     snap: 0
-    invert: 1
+    invert: 0
     type: 0
     axis: 1
     joyNum: 2
@@ -153,8 +153,8 @@ InputManager:
     m_Name: Horizontal1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: a
+    positiveButton: d
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
@@ -169,13 +169,13 @@ InputManager:
     m_Name: Vertical1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: up
-    positiveButton: down
+    negativeButton: w
+    positiveButton: s
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
     dead: 0.19
-    sensitivity: 5
+    sensitivity: 1
     snap: 0
     invert: 1
     type: 0
@@ -186,14 +186,14 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: right shift
+    positiveButton: left shift
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
     dead: 0.19
     sensitivity: 5
     snap: 0
-    invert: 1
+    invert: 0
     type: 0
     axis: 1
     joyNum: 1
@@ -202,14 +202,14 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: right ctrl
+    positiveButton: left ctrl
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
     dead: 0.19
     sensitivity: 5
     snap: 0
-    invert: 1
+    invert: 0
     type: 0
     axis: 1
     joyNum: 1
@@ -234,14 +234,14 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: left ctrl
+    positiveButton: right ctrl
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
     dead: 0.19
     sensitivity: 5
     snap: 0
-    invert: 1
+    invert: 0
     type: 0
     axis: 1
     joyNum: 1
