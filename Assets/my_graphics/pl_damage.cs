@@ -11,7 +11,8 @@ public class pl_damage : MonoBehaviour
     public int playerNumber;
     public GameObject scoreboard;
     private long waitTime;
-    private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ";
+    private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ"; // this was funny but it didn't work in webgl-mode
+    private string[] scorestrings = new string[] {" ", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
     
     public GameObject winsound;
 
@@ -62,7 +63,8 @@ public class pl_damage : MonoBehaviour
     private void updateScoreboard()
     {
         Color tmp = GetComponent<SpriteRenderer>().color;
-        scoreboard.GetComponent<Text>().text = fullscore.Substring((int)(tmp.a * 10 + 0.5f), 1);
+        //scoreboard.GetComponent<Text>().text = fullscore.Substring((int)(tmp.a * 10 + 0.5f), 1);
+        scoreboard.GetComponent<Text>().text = scorestrings[(int)(tmp.a * 10 + 0.5f)];
     }
     
     private void resetGame()
