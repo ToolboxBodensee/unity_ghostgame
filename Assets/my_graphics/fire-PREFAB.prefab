@@ -162,6 +162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5371fae66702a1774b9ee7e93e3bd1ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooting_player: {fileID: 0}
+  damage: 1
+  shooter_heal: 0
 --- !u!82 &7325909825236829024
 AudioSource:
   m_ObjectHideFlags: 0

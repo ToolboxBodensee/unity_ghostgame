@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class fire_move : MonoBehaviour
 {
+    public GameObject shooting_player;
+    public float damage;
+    public float shooter_heal;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -15,19 +19,20 @@ public class fire_move : MonoBehaviour
     {
 
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         Debug.Log(collider.tag);
-        
+
         if (collider.tag == "wallofdeath")
         {
             Destroy(gameObject, 2.0f);
         }
-        
+
         if (collider.tag == "Player")
         {
-            collider.gameObject.GetComponent<pl_damage>().ApplyDamage(1.0f);
+            collider.gameObject.GetComponent<pl_damage>().ApplyDamage(damage);
+            shooting_player.GetComponent<pl_damage>().ApplyDamage(shooter_heal*-1);
         }
     }
 }

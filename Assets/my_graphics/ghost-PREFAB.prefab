@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 7114957187952585738}
   - component: {fileID: 7367168218033474010}
   - component: {fileID: 8512079084522804743}
+  - component: {fileID: 646725700895503467}
   m_Layer: 0
   m_Name: ghost-PREFAB
   m_TagString: Player
@@ -455,6 +456,7 @@ MonoBehaviour:
   fireshot: {fileID: 7992735055720555235, guid: 1f0cea70144bada62b1ec2dcde3461a9,
     type: 3}
   firespeed: 665
+  fireKey: Fire
   cooldownTime: 1
 --- !u!114 &7367168218033474010
 MonoBehaviour:
@@ -567,3 +569,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &646725700895503467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306775511265734947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432a52fb4cfdda1e5bcb7dffb8ab8260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNumber: 0
+  firepos: {fileID: 2904983849832296477}
+  fireshot: {fileID: 2142454421730011495, guid: 47dbb087a573622e3a55d799a83a784c,
+    type: 3}
+  firespeed: 665
+  fireKey: Fire_b
+  cooldownTime: 10
