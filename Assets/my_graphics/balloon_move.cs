@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class balloon_move : MonoBehaviour
 {
-    public float speed = 40.0f;
-
-    public Animator animator;
-    public static System.Random rnd = new System.Random();
-
+    private static System.Random rnd = new System.Random();
+    private Animator animator;
+    
     // Start is called before the first frame update
     void Start()
     {
