@@ -8,6 +8,7 @@ public class balloon_move : MonoBehaviour
     public float speed = 40.0f;
 
     public Animator animator;
+    public static System.Random rnd = new System.Random();
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +38,7 @@ public class balloon_move : MonoBehaviour
 
     public void Respawn()
     {
-        System.Random rnd = new System.Random();
-        transform.position = new Vector3((float)rnd.Next(-6, 6), -8.0f, -0.5f);
+        transform.position = new Vector3((float)rnd.Next(-6, 6), -10f, -0.5f);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
