@@ -12,7 +12,7 @@ public class pl_damage : MonoBehaviour
     public GameObject scoreboard;
     private long waitTime;
     private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ"; // this was funny but it didn't work in webgl-mode
-    private string[] scorestrings = new string[] {" ", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",  "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "X"};
+    private string[] scorestrings = new string[] {" ", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",  "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"};
 
     public GameObject winsound;
 
