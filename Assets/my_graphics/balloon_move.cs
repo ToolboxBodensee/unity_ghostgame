@@ -40,12 +40,9 @@ public class balloon_move : MonoBehaviour
         System.Random rnd = new System.Random();
         transform.position = new Vector3((float)rnd.Next(-6, 6), -8.0f, -0.5f);
 
-        speed = (float)rnd.Next(30, 60);
-
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
-        Vector3 movement = new Vector3(0.0f, 1.0f, 0.0f);
-        rb.AddForce(movement * speed);
+        rb.gravityScale = (float)(rnd.Next(-10, -1))/100; //-0.01 to -0.1
 
         animator.ResetTrigger("Pop");
     }
