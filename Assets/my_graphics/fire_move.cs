@@ -34,11 +34,11 @@ public class fire_move : MonoBehaviour
             collider.gameObject.GetComponent<pl_damage>().ApplyDamage(damage);
             shooting_player.GetComponent<pl_damage>().ApplyDamage(shooter_heal*-1);
         }
-        
+
         if (collider.tag == "balloon")
         {
             collider.gameObject.GetComponent<balloon_move>().Pop();
-            
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,1,1);
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector3.Reflect(rb.velocity, Vector3.left);
         }
