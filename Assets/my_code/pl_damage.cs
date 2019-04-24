@@ -9,7 +9,9 @@ using UnityEngine.UI;
 public class pl_damage : MonoBehaviour
 {
     public int playerNumber;
-    public GameObject scoreboard;
+    private GameObject scoreboard;
+    private GameObject winText;
+    private GameObject title;
     private long waitTime;
     private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ"; // this was funny but it didn't work in webgl-mode
     private string[] scorestrings = new string[] {" ", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",  "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"};
@@ -20,6 +22,8 @@ public class pl_damage : MonoBehaviour
     void Start()
     {
         scoreboard = GameObject.Find("Scoreboard" + playerNumber);
+        winText = GameObject.Find("WinText");
+        title = GameObject.Find("GameTitle");
         updateScoreboard();
         waitTime = 0;
     }
@@ -45,9 +49,8 @@ public class pl_damage : MonoBehaviour
 
         if (tmp.a <= 0.0f)
         {
-            GameObject winText = GameObject.Find("WinText");
-
             winText.GetComponent<Text>().text = "PLAYER " + playerNumber + " WINS";
+            title.GetComponent<Text>().color = new Color(title.GetComponent<Text>().color.r, title.GetComponent<Text>().color.g, title.GetComponent<Text>().color.b, 200/255f);
             waitTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             Time.timeScale = 0.0f;
 
