@@ -7,11 +7,13 @@ public class balloon_move : MonoBehaviour
 {
     private static System.Random rnd = new System.Random();
     private Animator animator;
-    
+    private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         foreach(GameObject wallofdeath in GameObject.FindGameObjectsWithTag("wallofdeath"))
             Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), GetComponent<Collider2D>());
@@ -37,6 +39,8 @@ public class balloon_move : MonoBehaviour
     public void Respawn()
     {
         transform.position = new Vector3((float)rnd.Next(-6, 6), -10f, -0.5f);
+
+        spriteRenderer.color = new Color((float)rnd.Next(0, 255)/255, (float)rnd.Next(0, 255)/255, (float)rnd.Next(0, 255)/255);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
