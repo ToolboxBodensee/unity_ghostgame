@@ -49,7 +49,7 @@ public class pl_damage : MonoBehaviour
 
         if (tmp.a <= 0.0f)
         {
-            winText.GetComponent<Text>().text = "PLAYER " + playerNumber + " WINS";
+            winText.GetComponent<Text>().text = "PLAYER " + (playerNumber == 1 ? 2 : 1) + " WINS";
             title.GetComponent<Text>().color = new Color(title.GetComponent<Text>().color.r, title.GetComponent<Text>().color.g, title.GetComponent<Text>().color.b, 200/255f);
             waitTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             Time.timeScale = 0.0f;
