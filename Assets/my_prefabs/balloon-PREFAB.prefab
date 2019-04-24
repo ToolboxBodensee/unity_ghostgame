@@ -90,9 +90,9 @@ GameObject:
   - component: {fileID: 4817579484261760481}
   - component: {fileID: 4817579484261760482}
   - component: {fileID: 4817579484261760480}
-  - component: {fileID: 4817579484261760414}
   - component: {fileID: 4817579484261760415}
   - component: {fileID: 4817579484261760413}
+  - component: {fileID: 2991832845864985939}
   m_Layer: 0
   m_Name: balloon-PREFAB
   m_TagString: balloon
@@ -182,32 +182,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &4817579484261760414
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817579484261760483}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.016919494, y: 0.16919494}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96, y: 0.96}
-    newSize: {x: 0.96, y: 0.96}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5200932, y: 0.62161016}
-  m_EdgeRadius: 0
 --- !u!50 &4817579484261760415
 Rigidbody2D:
   serializedVersion: 4
@@ -220,15 +194,15 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: -0.05
+  m_Mass: 0.5
+  m_LinearDrag: 1.3
+  m_AngularDrag: 2.5
+  m_GravityScale: -0.3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!114 &4817579484261760413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,3 +215,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade4f8bdc214f4bc6abf8de50742a000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backRotationSpeed: 15
+--- !u!70 &2991832845864985939
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817579484261760483}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02000001, y: 0.11007503}
+  m_Size: {x: 0.5873068, y: 0.7103249}
+  m_Direction: 0
