@@ -62,7 +62,7 @@ public class balloon_move : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
-        rb.gravityScale = (float)(rnd.Next(-5, -1))/10; //-0.1 to -0.5
+        rb.gravityScale = rnd.Next(-50, -10)/100f; //-0.1 to -0.5
 
         animator.ResetTrigger("Pop");
     }
