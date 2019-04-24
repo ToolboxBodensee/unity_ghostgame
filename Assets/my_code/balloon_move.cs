@@ -53,18 +53,23 @@ public class balloon_move : MonoBehaviour
         transform.position = new Vector3((float)rnd.Next(-6, 6), -10f, -0.5f);
         transform.localRotation = Quaternion.identity;
 
-        int mainColor = rnd.Next(200, 256);
-        int secondaryColor = rnd.Next(0, 106) + rnd.Next(0, 4) * 50;
-        int otherColor = rnd.Next(0, 100);
-        int[] permutation = {mainColor, secondaryColor, otherColor};
-        permute(permutation);
-        spriteRenderer.color = new Color(permutation[0]/255f, permutation[1]/255f, permutation[2]/255f);
+        spriteRenderer.color = randomBrightBalloonColor();
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
         rb.gravityScale = rnd.Next(-50, -10)/100f; //-0.1 to -0.5
 
         animator.ResetTrigger("Pop");
+    }
+
+    private Color randomBrightBalloonColor()
+    {
+        int mainColor = rnd.Next(200, 256);
+        int secondaryColor = rnd.Next(0, 106) + rnd.Next(0, 4) * 50;
+        int otherColor = rnd.Next(0, 100);
+        int[] permutation = {mainColor, secondaryColor, otherColor};
+        permute(permutation);
+        return new Color(permutation[0]/255f, permutation[1]/255f, permutation[2]/255f);
     }
 
     private void permute(int[] permutation)
