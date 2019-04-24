@@ -6,6 +6,7 @@ using UnityEngine;
 public class balloon_move : MonoBehaviour
 {
     public float backRotationSpeed;
+    public GameObject powerup;
 
     private static System.Random rnd = new System.Random();
     private Animator animator;
@@ -20,9 +21,12 @@ public class balloon_move : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         foreach(GameObject wallofdeath in GameObject.FindGameObjectsWithTag("wallofdeath"))
+        {
             Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), powerup.GetComponent<Collider2D>());
+        }
 
-        Respawn();
+        Init();
     }
 
     // Update is called once per frame
@@ -40,17 +44,20 @@ public class balloon_move : MonoBehaviour
 
     public void Pop()
     {
+        GetComponent<AudioSource>().Play();
         animator.SetTrigger("Pop");
-        Invoke("Respawn", 0.25f);
+        LosePackage();
+        Destroy(gameObject, 0.25f);
     }
 
-    void OnBecameInvisible() {
-        Invoke("Respawn", 0.25f);
+    void OnBecameInvisible(){
+    
+        Destroy(gameObject, 0.25f);
     }
 
-    public void Respawn()
+    public void Init()
     {
-        transform.position = new Vector3((float)rnd.Next(-6, 6), -10f, -0.5f);
+        transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
         transform.localRotation = Quaternion.identity;
         if (rnd.Next(0, 2) == 1)
         {
@@ -59,11 +66,16 @@ public class balloon_move : MonoBehaviour
 
         spriteRenderer.color = randomBrightBalloonColor();
 
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
         rb.gravityScale = rnd.Next(-50, -10)/100f; //-0.1 to -0.5
 
         animator.ResetTrigger("Pop");
+        
+        // decide whether this balloon carries a powerup
+        if (rnd.Next(0, 4) > 0)
+            LosePackage();
     }
 
     private Color randomBrightBalloonColor()
@@ -73,7 +85,18 @@ public class balloon_move : MonoBehaviour
         int otherColor = rnd.Next(0, 100);
         int[] permutation = {mainColor, secondaryColor, otherColor};
         permute(permutation);
+
         return new Color(permutation[0]/255f, permutation[1]/255f, permutation[2]/255f);
+    }
+
+    public void LosePackage()
+    {
+        Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
+        //rb.simulated = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        rb.gravityScale = 0.2f;
+        powerup.transform.parent = null;
+        powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     private void permute(int[] permutation)

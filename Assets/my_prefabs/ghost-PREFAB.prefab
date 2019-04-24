@@ -273,6 +273,7 @@ GameObject:
   - component: {fileID: 7367168218033474010}
   - component: {fileID: 8512079084522804743}
   - component: {fileID: 646725700895503467}
+  - component: {fileID: 1622146126614289471}
   m_Layer: 0
   m_Name: ghost-PREFAB
   m_TagString: Player
@@ -471,7 +472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
-  scoreboard: {fileID: 0}
   winsound: {fileID: 593521900588796586}
 --- !u!82 &8512079084522804743
 AudioSource:
@@ -588,3 +588,16 @@ MonoBehaviour:
   firespeed: 665
   fireKey: Fire_b
   cooldownTime: 10
+--- !u!114 &1622146126614289471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8306775511265734947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7fa0c2ca3bbc4e6a60b8911577ed63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shield: 0

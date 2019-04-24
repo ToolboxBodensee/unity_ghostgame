@@ -85,12 +85,12 @@ PrefabInstance:
     - target: {fileID: 5090168644557380211, guid: 1f0cea70144bada62b1ec2dcde3461a9,
         type: 3}
       propertyPath: damage
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5090168644557380211, guid: 1f0cea70144bada62b1ec2dcde3461a9,
         type: 3}
       propertyPath: shooter_heal
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f0cea70144bada62b1ec2dcde3461a9, type: 3}
