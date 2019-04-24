@@ -1,0 +1,48 @@
+language: objective-c
+
+branches:
+  only:
+  - master
+
+os: osx
+
+rvm:
+- 2.2
+
+cache:
+  directories:
+  - ./Unity
+
+before_install:
+- chmod a+x ./Travis/install.sh
+- chmod a+x ./Travis/build.sh
+- chmod a+x ./Travis/tag.sh
+
+install:
+- ./Travis/install.sh
+
+script:
+- ./Travis/build.sh
+
+after_success:
+- ./Travis/tag.sh
+
+deploy:
+- provider: releases
+  api_key: $GIT_TOKEN
+  file:
+  - ./Build/windows.zip
+  - ./Build/linux.tar.gz
+  - ./Build/osx.dmg
+  name: $TRAVIS_BRANCH $(date +'%Y.%m.%d %H:%M')
+  skip_cleanup: true
+  on:
+    all_branches: true
+
+- provider: pages
+  skip-cleanup: true
+  github-token: $GIT_TOKEN
+  local-dir: ./Build/webgl/
+  keep-history: true
+  on:
+    branch: master
