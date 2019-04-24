@@ -52,6 +52,10 @@ public class balloon_move : MonoBehaviour
     {
         transform.position = new Vector3((float)rnd.Next(-6, 6), -10f, -0.5f);
         transform.localRotation = Quaternion.identity;
+        if (rnd.Next(0, 2) == 1)
+        {
+            transform.localScale = new Vector3(transform.localScale.x * -1, 1f, 1f);
+        }
 
         spriteRenderer.color = randomBrightBalloonColor();
 
