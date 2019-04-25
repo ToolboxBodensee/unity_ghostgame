@@ -94,7 +94,7 @@ public class balloon_move : MonoBehaviour
         Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
         //rb.simulated = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 0.2f;
+        rb.gravityScale = 0.14f;
         powerup.transform.parent = null;
         powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }
