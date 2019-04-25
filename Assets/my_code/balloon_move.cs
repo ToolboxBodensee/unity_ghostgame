@@ -46,7 +46,8 @@ public class balloon_move : MonoBehaviour
     {
         GetComponent<AudioSource>().Play();
         animator.SetTrigger("Pop");
-        LosePackage();
+        if (powerup)
+            LosePackage();
         Destroy(gameObject, 0.25f);
     }
 
@@ -75,7 +76,10 @@ public class balloon_move : MonoBehaviour
 
         // decide whether this balloon carries a powerup
         if (rnd.Next(0, 4) > 0)
-            LosePackage();
+        {
+            Destroy(powerup);
+            powerup = null;
+        }
     }
 
     private Color randomBrightBalloonColor()
@@ -92,9 +96,7 @@ public class balloon_move : MonoBehaviour
     public void LosePackage()
     {
         Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
-        //rb.simulated = true;
         rb.bodyType = RigidbodyType2D.Dynamic;
-        rb.gravityScale = 0.14f;
         powerup.transform.parent = null;
         powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }

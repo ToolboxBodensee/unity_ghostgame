@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3591398101414667850}
   - component: {fileID: 3945882875832020870}
   - component: {fileID: 8031766760322745767}
+  - component: {fileID: 5971928183101559946}
   m_Layer: 0
   m_Name: powerup-PREFAB
   m_TagString: Untagged
@@ -124,12 +125,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 0.14
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &3945882875832020870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,3 +239,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!58 &5971928183101559946
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3591398101414667853}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.003606677, y: 0.21}
+  serializedVersion: 2
+  m_Radius: 0.18277109
