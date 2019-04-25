@@ -51,7 +51,7 @@ public class balloon_move : MonoBehaviour
     }
 
     void OnBecameInvisible(){
-    
+
         Destroy(gameObject, 0.25f);
     }
 
@@ -69,10 +69,10 @@ public class balloon_move : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
-        rb.gravityScale = rnd.Next(-50, -10)/100f; //-0.1 to -0.5
+        rb.gravityScale = rnd.Next(-40, -10)/100f; //-0.1 to -0.4
 
         animator.ResetTrigger("Pop");
-        
+
         // decide whether this balloon carries a powerup
         if (rnd.Next(0, 4) > 0)
             LosePackage();
