@@ -1428,7 +1428,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   balloonPrefab: {fileID: 4817579484261760483, guid: 44bc22374bd44f9fb95111a42e21c763,
     type: 3}
-  numInitialBalloons: 4
+  numInitialBalloons: 5
+  balloonTime: 5
+  minBalloonTimeMs: 4000
+  maxBalloonTimeMs: 8500
+  balloonSpawnCountMax: 3
 --- !u!1 &2088366351
 GameObject:
   m_ObjectHideFlags: 0
