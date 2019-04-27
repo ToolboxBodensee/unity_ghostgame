@@ -51,11 +51,11 @@ public class pl_fire : MonoBehaviour
 
                 shot.transform.localScale = transform.localScale;
 
-                Rigidbody2D rb = shot.GetComponent<Rigidbody2D>();
-                Rigidbody2D rb_player = GetComponent<Rigidbody2D>();
+                Rigidbody rb = shot.GetComponent<Rigidbody>();
+                Rigidbody rb_player = GetComponent<Rigidbody>();
 
                 Vector3 movement = new Vector3(transform.localScale.x, 0.0f, 0.0f);
-                rb.velocity = new Vector3(0.0f, rb_player.velocity.y, 0.0f);
+                //rb.velocity = new Vector3(0.0f, rb_player.velocity.y, 0.0f);
                 rb.AddForce(movement * firespeed);
             }
         }

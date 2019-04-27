@@ -43,17 +43,22 @@ public class pl_move : MonoBehaviour
         //Vector3 pos = transform.position;
         //Dictionary<string, string> keys;
         
-        Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
+        Rigidbody rb = this.GetComponent<Rigidbody>();
         
         float moveHorizontal = Input.GetAxis ("Horizontal" + playerNumber);
         float moveVertical = Input.GetAxis ("Vertical" + playerNumber);
         
         //Debug.Log("hor: " + (moveHorizontal) + " / ver: " + (moveVertical));
 
-        Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
+        Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
 
         rb.AddForce (movement * speed);
-
+        /*
+        if (moveHorizontal < 0)
+            GetComponent<SpriteRenderer>().flipX = true;
+        else if (moveHorizontal > 0)
+            GetComponent<SpriteRenderer>().flipX = false;
+        */
         
         /*
         // flip graphics

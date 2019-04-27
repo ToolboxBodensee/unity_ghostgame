@@ -20,7 +20,7 @@ public class fire_move : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter(Collider collider)
     {
         Debug.Log(collider.tag);
 
@@ -39,7 +39,7 @@ public class fire_move : MonoBehaviour
         {
             collider.gameObject.GetComponent<balloon_move>().Pop();
             gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x*-1,1,1);
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = Vector3.Reflect(rb.velocity, Vector3.left);
         }
     }
