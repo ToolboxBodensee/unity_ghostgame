@@ -5,18 +5,20 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class pl_damage : MonoBehaviour
+public class pl_damage : NetworkBehaviour
 {
-    public int playerNumber;
+    public int playerNumber = 1;
+
+    [SyncVar]
     public float health;
-    
+
     private GameObject scoreboard;
     private GameObject winText;
     private GameObject title;
     private long waitTime;
-    
-    private string fullscore = " ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ"; // this was funny but it didn't work in webgl-mode
+
     private string[] scorestrings = new string[] {" ", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI",  "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"};
 
     public GameObject winsound;
@@ -25,7 +27,7 @@ public class pl_damage : MonoBehaviour
     void Start()
     {
         health = 100;   // health in percent
-        
+
         scoreboard = GameObject.Find("Scoreboard" + playerNumber);
         winText = GameObject.Find("WinText");
         title = GameObject.Find("GameTitle");
@@ -44,7 +46,7 @@ public class pl_damage : MonoBehaviour
             }
         }
     }
-    
+
     public void RefreshHealthAlpha()
     {
         Color tmp = GetComponent<SpriteRenderer>().color;
@@ -64,26 +66,51 @@ public class pl_damage : MonoBehaviour
 
         if (health <= 0.0f)
         {
-            winText.GetComponent<Text>().text = "PLAYER " + (playerNumber == 1 ? 2 : 1) + " WINS";
-            title.GetComponent<Text>().color = new Color(title.GetComponent<Text>().color.r, title.GetComponent<Text>().color.g, title.GetComponent<Text>().color.b, 200/255f);
-            waitTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+            RpcGameEnds();
             Time.timeScale = 0.0f;
-
-            foreach(AudioSource sound in winsound.GetComponents<AudioSource>())
-                sound.Play();
         }
 
-        GetComponent<AudioSource>().Play();
+        RpcApplyDamageOnClient();
+    }
 
+    [ClientRpc]
+    private void RpcGameEnds()
+    {
+        updateWinText();
+        playWinSound();
+        Time.timeScale = 0.0f;
+    }
+
+    [ClientRpc]
+    private void RpcApplyDamageOnClient()
+    {
+        playDamageSound();
         RefreshHealthAlpha();
         updateScoreboard();
+    }
+
+    private void playDamageSound()
+    {
+        GetComponent<AudioSource>().Play();
     }
 
     private void updateScoreboard()
     {
         Color tmp = GetComponent<SpriteRenderer>().color;
-        //scoreboard.GetComponent<Text>().text = fullscore.Substring((int)(tmp.a * 10 + 0.5f), 1);
         scoreboard.GetComponent<Text>().text = scorestrings[(int)(health / 10 + 0.5f)];
+    }
+
+    private void updateWinText()
+    {
+        winText.GetComponent<Text>().text = "PLAYER " + (playerNumber == 1 ? 2 : 1) + " WINS";
+        title.GetComponent<Text>().color = new Color(title.GetComponent<Text>().color.r, title.GetComponent<Text>().color.g, title.GetComponent<Text>().color.b, 200/255f);
+        waitTime = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
+    }
+
+    private void playWinSound()
+    {
+        foreach(AudioSource sound in winsound.GetComponents<AudioSource>())
+            sound.Play();
     }
 
     private void resetGame()

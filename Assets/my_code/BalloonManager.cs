@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BalloonManager : MonoBehaviour
+public class BalloonManager : NetworkBehaviour
 {
     public GameObject balloonPrefab;
     public int numInitialBalloons = 5;
@@ -14,15 +15,26 @@ public class BalloonManager : MonoBehaviour
     private int z;
 
     // Start is called before the first frame update
+    [Server]
     void Start()
     {
+        if (!isServer)
+        {
+            return;
+        }
         for(int i=0; i<numInitialBalloons; i++)
             SpawnBalloon();
     }
 
     // Update is called once per frame
+    [Server]
     void Update()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         balloonTime -= Time.deltaTime;
 
         if (balloonTime < 0)
@@ -35,10 +47,11 @@ public class BalloonManager : MonoBehaviour
         }
     }
 
-    public void SpawnBalloon()
+    private void SpawnBalloon()
     {
         Vector3 pos = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, z);
-        Instantiate(balloonPrefab, pos, Quaternion.identity);
+        GameObject balloon = Instantiate(balloonPrefab, pos, Quaternion.identity);
+        NetworkServer.Spawn(balloon);
         z++;
     }
 }

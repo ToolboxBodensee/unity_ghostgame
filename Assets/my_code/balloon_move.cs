@@ -2,84 +2,100 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class balloon_move : MonoBehaviour
+public class balloon_move : NetworkBehaviour
 {
-    public float backRotationSpeed;
+    public GameObject balloon;
     public GameObject powerup;
 
+    private Color balloonColor;
+    private bool hasPackage;
+
     private static System.Random rnd = new System.Random();
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-
-        foreach(GameObject wallofdeath in GameObject.FindGameObjectsWithTag("wallofdeath"))
+        if (isServer)
         {
-            Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), powerup.GetComponent<Collider2D>());
-        }
+            Rigidbody2D rb = balloon.GetComponent<Rigidbody2D>();
 
-        Init();
+            transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
+            transform.localRotation = Quaternion.identity;
+            if (rnd.Next(0, 2) == 1)
+            {
+                transform.localScale = new Vector3(transform.localScale.x * -1, 1f, 1f);
+            }
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = 0f;
+            rb.gravityScale = rnd.Next(-75, -45)/100f; //-0.75 to -0.45
+
+            // decide whether this balloon carries a powerup
+            hasPackage = rnd.Next(0, 4) == 0;
+
+            //decide color
+            balloonColor = randomBrightBalloonColor();
+
+            RpcOnBalloonColorUpdated(balloonColor);
+            RpcOnHasPackageUpdated(hasPackage);
+
+            DelayedDestroy();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.localEulerAngles.z > 180f)
-        {
-            rb.AddTorque(Time.deltaTime * backRotationSpeed * (transform.localEulerAngles.z-180f)/180f);
-        }
-        else if (transform.localEulerAngles.z > 0f)
-        {
-            rb.AddTorque(Time.deltaTime * backRotationSpeed * transform.localEulerAngles.z/180f * -1);
-        }
     }
 
-    public void Pop()
+    [ClientRpc]
+    private void RpcOnBalloonColorUpdated(Color balloonColor)
     {
-        GetComponent<AudioSource>().Play();
-        animator.SetTrigger("Pop");
-        if (powerup)
-            LosePackage();
-        Destroy(gameObject, 0.25f);
+        SpriteRenderer spriteRenderer = balloon.GetComponent<SpriteRenderer>();
+        spriteRenderer.color = balloonColor;
     }
 
-    void OnBecameInvisible(){
-
-        Destroy(gameObject, 0.25f);
-    }
-
-    public void Init()
+    [ClientRpc]
+    private void RpcOnHasPackageUpdated(bool hasPackage)
     {
-        transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
-        transform.localRotation = Quaternion.identity;
-        if (rnd.Next(0, 2) == 1)
-        {
-            transform.localScale = new Vector3(transform.localScale.x * -1, 1f, 1f);
-        }
-
-        spriteRenderer.color = randomBrightBalloonColor();
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = 0f;
-        rb.gravityScale = rnd.Next(-40, -10)/100f; //-0.1 to -0.4
-
-        animator.ResetTrigger("Pop");
-
-        // decide whether this balloon carries a powerup
-        if (rnd.Next(0, 4) > 0)
+        if (!hasPackage)
         {
             Destroy(powerup);
             powerup = null;
         }
+    }
+
+    [Command]
+    public void CmdPop()
+    {
+        RpcApplyPop();
+        if (hasPackage)
+            LosePackage();
+        NetworkServer.Destroy(gameObject);
+    }
+
+    [ClientRpc]
+    private void RpcApplyPop()
+    {
+        balloon.GetComponent<Animator>().SetTrigger("Pop");
+        balloon.GetComponent<AudioSource>().Play();
+    }
+
+    [Server]
+    IEnumerator DelayedDestroy()
+    {
+        yield return new WaitForSeconds(1f);
+        NetworkServer.Destroy(gameObject);
+    }
+
+    private void LosePackage()
+    {
+        Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        powerup.transform.parent = null;
+        powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     private Color randomBrightBalloonColor()
@@ -91,14 +107,6 @@ public class balloon_move : MonoBehaviour
         permute(permutation);
 
         return new Color(permutation[0]/255f, permutation[1]/255f, permutation[2]/255f);
-    }
-
-    public void LosePackage()
-    {
-        Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        powerup.transform.parent = null;
-        powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     private void permute(int[] permutation)

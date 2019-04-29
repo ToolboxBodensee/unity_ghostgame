@@ -17,10 +17,10 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - Player
+  - Shot
+  - Items
   - 
   - 
   - 

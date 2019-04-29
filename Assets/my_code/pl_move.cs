@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class pl_move : MonoBehaviour
+public class pl_move : NetworkBehaviour
 {
-    public int playerNumber;
+    public int playerNumber = 1;
     public float speed = 2f;
 
     // Start is called before the first frame update
@@ -16,8 +17,11 @@ public class pl_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vector3 pos = transform.position;
-        //Dictionary<string, string> keys;
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
 
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
 
