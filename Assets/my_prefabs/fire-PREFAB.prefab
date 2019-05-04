@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4557963361560239464}
   - component: {fileID: 5090168644557380211}
   - component: {fileID: 7325909825236829024}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: fire-PREFAB
   m_TagString: shot
   m_Icon: {fileID: 0}

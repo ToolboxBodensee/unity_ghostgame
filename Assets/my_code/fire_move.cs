@@ -42,5 +42,10 @@ public class fire_move : MonoBehaviour
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector3.Reflect(rb.velocity, Vector3.left);
         }
+
+        if (collider.tag == "powerup")
+        {
+            Destroy(collider.gameObject);
+        }
     }
 }

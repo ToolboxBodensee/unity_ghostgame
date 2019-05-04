@@ -5,59 +5,16 @@ using UnityEngine;
 
 public class balloon_move : MonoBehaviour
 {
-    public float backRotationSpeed;
     public GameObject powerup;
 
+    private Color balloonColor;
     private static System.Random rnd = new System.Random();
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        foreach(GameObject wallofdeath in GameObject.FindGameObjectsWithTag("wallofdeath"))
-        {
-            Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-            Physics2D.IgnoreCollision(wallofdeath.GetComponent<Collider2D>(), powerup.GetComponent<Collider2D>());
-        }
-
-        Init();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (transform.localEulerAngles.z > 180f)
-        {
-            rb.AddTorque(Time.deltaTime * backRotationSpeed * (transform.localEulerAngles.z-180f)/180f);
-        }
-        else if (transform.localEulerAngles.z > 0f)
-        {
-            rb.AddTorque(Time.deltaTime * backRotationSpeed * transform.localEulerAngles.z/180f * -1);
-        }
-    }
-
-    public void Pop()
-    {
-        GetComponent<AudioSource>().Play();
-        animator.SetTrigger("Pop");
-        if (powerup)
-            LosePackage();
-        Destroy(gameObject, 0.25f);
-    }
-
-    void OnBecameInvisible(){
-
-        Destroy(gameObject, 0.25f);
-    }
-
-    public void Init()
-    {
         transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
         transform.localRotation = Quaternion.identity;
         if (rnd.Next(0, 2) == 1)
@@ -65,21 +22,55 @@ public class balloon_move : MonoBehaviour
             transform.localScale = new Vector3(transform.localScale.x * -1, 1f, 1f);
         }
 
-        spriteRenderer.color = randomBrightBalloonColor();
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
         rb.angularVelocity = 0f;
-        rb.gravityScale = rnd.Next(-40, -10)/100f; //-0.1 to -0.4
-
-        animator.ResetTrigger("Pop");
+        rb.gravityScale = rnd.Next(-75, -45)/100f; //-0.75 to -0.45
 
         // decide whether this balloon carries a powerup
-        if (rnd.Next(0, 4) > 0)
+        bool hasPackage = rnd.Next(0, 4) == 0;
+
+        //decide color
+        balloonColor = randomBrightBalloonColor();
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = balloonColor;
+
+        if (!hasPackage)
         {
             Destroy(powerup);
             powerup = null;
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+    }
+
+    void OnBecameInvisible()
+    {
+        if (powerup)
+            Destroy(powerup, 0.4f);
+        Destroy(gameObject, 0.4f);
+    }
+
+
+    public void Pop()
+    {
+        GetComponent<Animator>().SetTrigger("Pop");
+        GetComponent<AudioSource>().Play();
+        if (powerup)
+            LosePackage();
+        Destroy(gameObject, 0.25f);
+    }
+
+    private void LosePackage()
+    {
+        Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Dynamic;
+        powerup.transform.parent = null;
+        powerup.GetComponent<BoxCollider2D>().isTrigger = true;
+        powerup = null;
     }
 
     private Color randomBrightBalloonColor()
@@ -91,14 +82,6 @@ public class balloon_move : MonoBehaviour
         permute(permutation);
 
         return new Color(permutation[0]/255f, permutation[1]/255f, permutation[2]/255f);
-    }
-
-    public void LosePackage()
-    {
-        Rigidbody2D rb = powerup.GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        powerup.transform.parent = null;
-        powerup.GetComponent<BoxCollider2D>().isTrigger = true;
     }
 
     private void permute(int[] permutation)

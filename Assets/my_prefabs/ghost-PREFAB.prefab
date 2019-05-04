@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5273040416632668483}
   - component: {fileID: 6598756546022467615}
   - component: {fileID: 495759066634759075}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: winsound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3352083324286731373}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: firespawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 8512079084522804743}
   - component: {fileID: 646725700895503467}
   - component: {fileID: 1622146126614289471}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ghost-PREFAB
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -376,11 +376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a43a18dc61b718f6b1879fa06303b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 1
   speed: 10
-  fireshot: {fileID: 7992735055720555235, guid: 1f0cea70144bada62b1ec2dcde3461a9,
-    type: 3}
-  facing: 0
 --- !u!61 &8306775511265734951
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -452,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432a52fb4cfdda1e5bcb7dffb8ab8260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 1
   firepos: {fileID: 2904983849832296477}
   fireshot: {fileID: 7992735055720555235, guid: 1f0cea70144bada62b1ec2dcde3461a9,
     type: 3}
@@ -471,7 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d163e5e6d57e16f4cbce83eb52fb51cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 1
+  health: 0
   winsound: {fileID: 593521900588796586}
 --- !u!82 &8512079084522804743
 AudioSource:
@@ -581,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432a52fb4cfdda1e5bcb7dffb8ab8260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNumber: 0
+  playerNumber: 1
   firepos: {fileID: 2904983849832296477}
   fireshot: {fileID: 2142454421730011495, guid: 47dbb087a573622e3a55d799a83a784c,
     type: 3}
