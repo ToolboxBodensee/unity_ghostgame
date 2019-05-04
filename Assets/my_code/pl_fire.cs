@@ -41,7 +41,7 @@ public class pl_fire : MonoBehaviour
                 firePossible = false;
                 fire = cooldownTime;
 
-                animator.SetTrigger(fireKey);
+                animator.SetTrigger("Fire");
 
                 Vector3 fireposition = firepos.transform.position;
 
