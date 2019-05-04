@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class BalloonManager : NetworkBehaviour
 {
     public GameObject balloonPrefab;
+    public GameObject powerupPrefab;
     public int numInitialBalloons = 5;
     public float balloonTime = 5.0f;
     public int minBalloonTimeMs = 4000;
@@ -51,7 +52,12 @@ public class BalloonManager : NetworkBehaviour
     {
         Vector3 pos = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, z);
         GameObject balloon = Instantiate(balloonPrefab, pos, Quaternion.identity);
+        GameObject powerup = Instantiate(powerupPrefab, pos, Quaternion.identity);
+        balloon.GetComponent<balloon_move>().powerup = powerup;
+        balloon.GetComponent<HingeJoint2D>().connectedBody = powerup.GetComponent<Rigidbody2D>();
+        balloon.GetComponent<HingeJoint2D>().enabled = true;
         NetworkServer.Spawn(balloon);
+        NetworkServer.Spawn(powerup);
         z++;
     }
 }

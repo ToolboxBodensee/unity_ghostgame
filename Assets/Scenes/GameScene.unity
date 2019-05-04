@@ -830,8 +830,8 @@ MonoBehaviour:
   m_SpawnPrefabs:
   - {fileID: 7992735055720555235, guid: 1f0cea70144bada62b1ec2dcde3461a9, type: 3}
   - {fileID: 2142454421730011495, guid: 47dbb087a573622e3a55d799a83a784c, type: 3}
-  - {fileID: 2047602728247140100, guid: 1e3c1c2d8df325356993df1fab759300, type: 3}
-  - {fileID: 8306775511265734947, guid: 0e16559a86fc5e27f926a6996c6573ed, type: 3}
+  - {fileID: 3591398101414667853, guid: 4bfca3fb9c15dee2b9c4ae8f47f7014d, type: 3}
+  - {fileID: 4817579484261760483, guid: 44bc22374bd44f9fb95111a42e21c763, type: 3}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1581,7 +1581,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3a587c562b1529659992114a5a53937, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balloonPrefab: {fileID: 2047602728247140100, guid: 1e3c1c2d8df325356993df1fab759300,
+  balloonPrefab: {fileID: 4817579484261760483, guid: 44bc22374bd44f9fb95111a42e21c763,
+    type: 3}
+  powerupPrefab: {fileID: 3591398101414667853, guid: 4bfca3fb9c15dee2b9c4ae8f47f7014d,
     type: 3}
   numInitialBalloons: 5
   balloonTime: 5

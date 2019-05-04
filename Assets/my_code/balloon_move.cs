@@ -27,6 +27,8 @@ public class balloon_move : NetworkBehaviour
             {
                 transform.localScale = new Vector3(transform.localScale.x * -1, 1f, 1f);
             }
+            balloon.transform.position = transform.position;
+            balloon.transform.localScale = transform.localScale;
 
             rb.velocity = Vector3.zero;
             rb.angularVelocity = 0f;
