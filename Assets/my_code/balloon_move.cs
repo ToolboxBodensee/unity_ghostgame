@@ -15,7 +15,7 @@ public class balloon_move : MonoBehaviour
     {
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
+        transform.position = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, 0f);
         transform.localRotation = Quaternion.identity;
         if (rnd.Next(0, 2) == 1)
         {

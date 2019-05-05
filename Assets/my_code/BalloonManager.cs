@@ -11,7 +11,6 @@ public class BalloonManager : MonoBehaviour
     public int maxBalloonTimeMs = 8500;
     public int balloonSpawnCountMax = 3;
     private System.Random rnd = new System.Random();
-    private int z;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +36,7 @@ public class BalloonManager : MonoBehaviour
 
     public void SpawnBalloon()
     {
-        Vector3 pos = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, z);
+        Vector3 pos = new Vector3(((float)rnd.Next(-600, 600) / 100), -10f, -0.5f);
         Instantiate(balloonPrefab, pos, Quaternion.identity);
-        z++;
     }
 }
