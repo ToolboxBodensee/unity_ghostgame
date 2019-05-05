@@ -16,15 +16,10 @@ public class pl_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vector3 pos = transform.position;
-        //Dictionary<string, string> keys;
-
         Rigidbody2D rb = this.GetComponent<Rigidbody2D>();
 
         float moveHorizontal = Input.GetAxis ("Horizontal" + playerNumber);
         float moveVertical = Input.GetAxis ("Vertical" + playerNumber);
-
-        //Debug.Log("hor: " + (moveHorizontal) + " / ver: " + (moveVertical));
 
         Vector3 movement = new Vector3 (moveHorizontal, moveVertical, 0.0f);
 
