@@ -1,4 +1,7 @@
 # unity_ghostgame
+
+**Entwicklung nur auf [GitLab](https://gitlab.com/ToolboxBodensee/gamedev/unity_ghostgame). Auf GitHub befindet sich lediglich ein Mirror**
+
 test game developed at unity game jam (gamedev-meeting)
 
 
